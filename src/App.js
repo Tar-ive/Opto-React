@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react'; // Removed useEffect
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Input } from "./components/ui/input";
@@ -41,7 +41,7 @@ const Opto = () => {
       const sharpeRatio = (portfolioReturn - 0.02) / portfolioRisk; // Assuming risk-free rate of 2%
       return { return: portfolioReturn, risk: portfolioRisk, sharpeRatio, weights };
     });
-  }, [assets]);
+  }, [assets, calculatePortfolioMetrics, generateRandomWeights]); // Added missing dependencies
 
   const optimizePortfolio = () => {
     const optimalPortfolio = portfolios.reduce((best, current) => {
