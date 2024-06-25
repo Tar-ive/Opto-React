@@ -21,17 +21,17 @@ const Opto = () => {
     ));
   };
 
-  const generateRandomWeights = () => {
+   const generateRandomWeights = useCallback(() => {
     const weights = assets.map(() => Math.random());
     const sum = weights.reduce((a, b) => a + b, 0);
     return weights.map(w => w / sum);
-  };
+  }, [assets]);
 
-  const calculatePortfolioMetrics = (weights) => {
+  const calculatePortfolioMetrics = useCallback((weights) => {
     const portfolioReturn = weights.reduce((sum, weight, i) => sum + weight * assets[i].return, 0);
     const portfolioRisk = Math.sqrt(weights.reduce((sum, weight, i) => sum + Math.pow(weight * assets[i].risk, 2), 0));
     return { return: portfolioReturn, risk: portfolioRisk };
-  };
+  }, [assets]);
 
   const portfolios = useMemo(() => {
   const numPortfolios = 1000;
