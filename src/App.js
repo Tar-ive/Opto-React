@@ -34,14 +34,14 @@ const Opto = () => {
   };
 
   const portfolios = useMemo(() => {
-    const numPortfolios = 1000;
-    return Array(numPortfolios).fill().map(() => {
-      const weights = generateRandomWeights();
-      const { return: portfolioReturn, risk: portfolioRisk } = calculatePortfolioMetrics(weights);
-      const sharpeRatio = (portfolioReturn - 0.02) / portfolioRisk; // Assuming risk-free rate of 2%
-      return { return: portfolioReturn, risk: portfolioRisk, sharpeRatio, weights };
-    });
-  }, [assets, calculatePortfolioMetrics, generateRandomWeights]); // Added missing dependencies
+  const numPortfolios = 1000;
+  return Array(numPortfolios).fill().map(() => {
+    const weights = generateRandomWeights();
+    const { return: portfolioReturn, risk: portfolioRisk } = calculatePortfolioMetrics(weights);
+    const sharpeRatio = (portfolioReturn - 0.02) / portfolioRisk; // Assuming risk-free rate of 2%
+    return { return: portfolioReturn, risk: portfolioRisk, sharpeRatio, weights };
+  });
+}, [calculatePortfolioMetrics, generateRandomWeights]); // Include these functions in the dependency array
 
   const optimizePortfolio = () => {
     const optimalPortfolio = portfolios.reduce((best, current) => {
